@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+service ClientService {
+  rpc UploadFile(UploadRequest) returns (UploadResponse);
+  rpc DownloadFile(DownloadRequest) returns (DownloadResponse);
+}
+
+message UploadRequest {
+  string filename = 1;
+  repeated bytes chunks = 2;
+}
+
+message UploadResponse { bool success = 1; }
+
+message DownloadRequest {
+  string filename = 1;
+}
+
+message DownloadResponse {
+  repeated bytes chunks = 1;
+}

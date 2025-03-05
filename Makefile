@@ -1,14 +1,15 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall
-TARGET = ft
+LINKFLAGS = /usr/local/lib/libsodium.a /usr/local/lib/libredis++.a /usr/local/lib/libhiredis.a
+TARGET = main
 
-SRC = ft.cpp
+SRC = main.cpp
 
 all: $(TARGET)
 	./$(TARGET)
 
 $(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC) /usr/local/lib/libredis++.a /usr/local/lib/libhiredis.a -pthread
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC) $(LINKFLAGS) -pthread
 
 clean:
 	rm -f $(TARGET)

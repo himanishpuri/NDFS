@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+service TrackingService {
+  rpc RegisterNode(NodeInfo) returns (RegisterResponse);
+  rpc Heartbeat(NodeInfo) returns (HeartbeatResponse);
+  rpc StoreChunk(ChunkInfo) returns (StoreResponse);
+  rpc GetChunkLocation(ChunkRequest) returns (ChunkResponse);
+}
+
+message NodeInfo {
+  string node_id = 1;
+  string ip = 2;
+  int32 port = 3;
+}
+
+message ChunkInfo {
+  string chunk_hash = 1;
+  repeated string node_ids = 2;
+}
+
+message ChunkRequest {
+  string chunk_hash = 1;
+}
+
+message ChunkResponse {
+  repeated string node_ids = 1;
+}
+
+message RegisterResponse { bool success = 1; }
+message HeartbeatResponse { bool success = 1; }
+message StoreResponse { bool success = 1; }
